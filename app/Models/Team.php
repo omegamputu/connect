@@ -4,31 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Team extends Model
 {
     use SoftDeletes;
     //
     protected $fillable = [
-        'name', 
+        'name',
         'code',
-        'age_group',
-        'gender',
-        'description',
+        'category_id',
         'is_active',
         'created_by',
         'updated_by',
     ];
+    //
 
     protected $casts = [
         'is_active' => 'boolean',
     ];
 
-    public function teams(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Team::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function createdBy(): BelongsTo
@@ -40,4 +38,5 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
 }
