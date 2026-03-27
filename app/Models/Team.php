@@ -39,4 +39,14 @@ class Team extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function homeMatches()
+    {
+        return $this->hasMany(FootballMatch::class, 'home_team_id');
+    }
+
+    public function awayMatches()
+    {
+        return $this->hasMany(FootballMatch::class, 'away_team_id');
+    }
+
 }

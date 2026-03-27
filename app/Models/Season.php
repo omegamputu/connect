@@ -44,4 +44,9 @@ class Season extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function matches(): HasMany
+    {
+        return $this->hasMany(FootballMatch::class);
+    }
 }

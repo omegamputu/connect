@@ -34,6 +34,8 @@ return new class extends Migration
                 //'national',
             ]);
 
+            $table->enum('gender', ['male', 'female'])->default('male');
+
             $table->boolean('is_active')->default(true);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();

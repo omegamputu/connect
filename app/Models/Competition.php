@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Competition extends Model
@@ -20,6 +21,7 @@ class Competition extends Model
         'season_id',
         'organizer',
         'level',
+        'gender',
         'is_active',
         'created_by',
         'updated_by',
@@ -47,5 +49,10 @@ class Competition extends Model
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function matches(): HasMany
+    {
+        return $this->hasMany(FootballMatch::class);
     }
 }

@@ -94,6 +94,13 @@ class CompetitionResource extends Resource
                         'continental' => 'Continental', 
                         'zonal' => 'Zonal'])
                     ->required(),
+                Select::make('gender')
+                    ->options([
+                        'male' => 'Male',
+                        'female' => 'Female'
+                    ])
+                    ->label('Gender')
+                    ->required(),
                 Textarea::make('description')
                     ->rows(4)
                     ->columnSpanFull(),

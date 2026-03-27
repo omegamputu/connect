@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Filament\Resources\FootballMatches;
+
+use App\Filament\Resources\FootballMatches\Pages\CreateFootballMatch;
+use App\Filament\Resources\FootballMatches\Pages\EditFootballMatch;
+use App\Filament\Resources\FootballMatches\Pages\ListFootballMatches;
+use App\Filament\Resources\FootballMatches\Pages\ViewFootballMatch;
+use App\Filament\Resources\FootballMatches\Schemas\FootballMatchForm;
+use App\Filament\Resources\FootballMatches\Schemas\FootballMatchInfolist;
+use App\Filament\Resources\FootballMatches\Tables\FootballMatchesTable;
+use App\Models\FootballMatch;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
+
+class FootballMatchResource extends Resource
+{
+    protected static ?string $model = FootballMatch::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendar;
+
+    protected static ?string $navigationLabel = 'Matches';
+
+    protected static ?string $pluralModelLabel = 'Matches';
+
+    protected static ?string $modelLabel = 'Match';
+
+    protected static string | UnitEnum | null $navigationGroup = 'National Teams Management';
+
+    protected static ?int $navigationSort = 5;
+
+    public static function form(Schema $schema): Schema
+    {
+        return FootballMatchForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return FootballMatchInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return FootballMatchesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListFootballMatches::route('/'),
+            'create' => CreateFootballMatch::route('/create'),
+            'view' => ViewFootballMatch::route('/{record}'),
+            'edit' => EditFootballMatch::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+}
