@@ -4,19 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Competition extends Model
 {
-    use SoftDeletes;
     //
+    use SoftDeletes;
+
     protected $fillable = [
-        'name', 
+        'name',
         'code',
-        'age_group',
-        'gender',
         'description',
+        'competition_type',
+        'category_id',
+        'season_id',
+        'organizer',
+        'level',
         'is_active',
         'created_by',
         'updated_by',
@@ -26,14 +29,14 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
-    public function teams(): HasMany
+    public function category(): BelongsTo
     {
-        return $this->hasMany(Team::class);
+        return $this->belongsTo(Category::class);
     }
 
-    public function competitions(): HasMany
+    public function season(): BelongsTo
     {
-        return $this->hasMany(Competition::class);
+        return $this->belongsTo(Season::class);
     }
 
     public function createdBy(): BelongsTo
