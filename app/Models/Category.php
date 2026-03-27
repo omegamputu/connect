@@ -15,7 +15,7 @@ class Category extends Model
         'name', 
         'code',
         'age_group',
-        'gender',
+        //'gender',
         'description',
         'is_active',
         'created_by',

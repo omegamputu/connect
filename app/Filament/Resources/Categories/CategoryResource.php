@@ -60,28 +60,23 @@ class CategoryResource extends Resource
                 TextInput::make('name')
                     ->label('Name')
                     ->maxLength(100)
-                    ->placeholder('U17 Male')
+                    ->placeholder('Example : U17, U20, Senior, etc.')
                     ->required(),
                 TextInput::make('code')
                     ->label('Code')
                     ->unique(ignoreRecord: true)
                     ->maxLength(20)
-                    ->placeholder('Example : U17M'),
+                    ->placeholder('Example : U17, U20, SEN, etc.'),
                 TextInput::make('age_group')
                     ->label('Age Group')
                     ->maxLength(10)
                     ->required(),
-                Select::make('gender')
-                    ->label('Gender')
-                    ->options(['male' => 'Male', 'female' => 'Female'])
-                    ->default('male')
+                Toggle::make('is_active')
+                    ->default(true)
                     ->required(),
                 Textarea::make('description')
                     ->rows(4)
                     ->columnSpanFull(),
-                Toggle::make('is_active')
-                    ->default(true)
-                    ->required(),
                 Hidden::make('created_by')
                     ->default(fn () => Auth::id())
                     ->dehydrated(fn ($record) => $record === null),
@@ -98,8 +93,6 @@ class CategoryResource extends Resource
                 TextEntry::make('code')
                     ->placeholder('-'),
                 TextEntry::make('age_group'),
-                TextEntry::make('gender')
-                    ->badge(),
                 TextEntry::make('description')
                     ->placeholder('-')
                     ->columnSpanFull(),
@@ -134,14 +127,6 @@ class CategoryResource extends Resource
                     ->searchable(),
                 TextColumn::make('age_group')
                     ->searchable(),
-                TextColumn::make('gender')
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'male' => 'info',
-                        'female' => 'success',
-                        default => 'gray',
-                    }),
                 ToggleColumn::make('is_active')
                     ->label('Active')
                     ->afterStateUpdated(function ($record,$state) {
