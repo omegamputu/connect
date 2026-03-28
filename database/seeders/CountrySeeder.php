@@ -23,6 +23,7 @@ class CountrySeeder extends Seeder
             ["code" => "DZA", "name" => "Algérie"],
             ["code" => "DEU", "name" => "Allemagne"],
             ["code" => "AND", "name" => "Andorre"],
+            ["code" => "ENG", "name" => "Angleterre"], // Ajout FIFA
             ["code" => "AGO", "name" => "Angola"],
             ["code" => "AIA", "name" => "Anguilla"],
             ["code" => "ATA", "name" => "Antarctique"],
@@ -74,6 +75,7 @@ class CountrySeeder extends Seeder
             ["code" => "DNK", "name" => "Danemark"],
             ["code" => "DJI", "name" => "Djibouti"],
             ["code" => "DMA", "name" => "Dominique"],
+            ["code" => "SCO", "name" => "Écosse"], // Ajout FIFA
             ["code" => "EGY", "name" => "Égypte"],
             ["code" => "ARE", "name" => "Émirats arabes unis"],
             ["code" => "ECU", "name" => "Équateur"],
@@ -127,6 +129,7 @@ class CountrySeeder extends Seeder
             ["code" => "IRQ", "name" => "Irak"],
             ["code" => "IRN", "name" => "Iran"],
             ["code" => "IRL", "name" => "Irlande"],
+            ["code" => "NIR", "name" => "Irlande du Nord"], // Ajout FIFA
             ["code" => "ISL", "name" => "Islande"],
             ["code" => "ISR", "name" => "Israël"],
             ["code" => "ITA", "name" => "Italie"],
@@ -138,6 +141,7 @@ class CountrySeeder extends Seeder
             ["code" => "KEN", "name" => "Kenya"],
             ["code" => "KGZ", "name" => "Kirghizistan"],
             ["code" => "KIR", "name" => "Kiribati"],
+            ["code" => "KOS", "name" => "Kosovo"], // Ajout FIFA
             ["code" => "KWT", "name" => "Koweït"],
             ["code" => "LAO", "name" => "Laos"],
             ["code" => "REU", "name" => "La Réunion"],
@@ -190,11 +194,11 @@ class CountrySeeder extends Seeder
             ["code" => "PNG", "name" => "Papouasie-Nouvelle-Guinée"],
             ["code" => "PRY", "name" => "Paraguay"],
             ["code" => "NLD", "name" => "Pays-Bas"],
+            ["code" => "WAL", "name" => "Pays de Galles"], // Ajout FIFA
             ["code" => "PER", "name" => "Pérou"],
             ["code" => "PHL", "name" => "Philippines"],
             ["code" => "PCN", "name" => "Pitcairn"],
             ["code" => "POL", "name" => "Pologne"],
-            ["code" => "PYF", "name" => "Polynésie française"],
             ["code" => "PRI", "name" => "Porto Rico"],
             ["code" => "PRT", "name" => "Portugal"],
             ["code" => "QAT", "name" => "Qatar"],
@@ -234,7 +238,8 @@ class CountrySeeder extends Seeder
             ["code" => "SUR", "name" => "Suriname"],
             ["code" => "SYR", "name" => "Syrie"],
             ["code" => "TJK", "name" => "Tadjikistan"],
-            ["code" => "TWN", "name" => "Taïwan"],
+            ["code" => "TAH", "name" => "Tahiti"], // Nom FIFA (ex-Polynésie fr.)
+            ["code" => "TPE", "name" => "Taipei chinois"], // Nom FIFA (ex-Taïwan)
             ["code" => "TZA", "name" => "Tanzanie"],
             ["code" => "TCD", "name" => "Tchad"],
             ["code" => "ATF", "name" => "Terres australes françaises"],

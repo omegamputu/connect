@@ -31,4 +31,9 @@ class PlayerSportInfo extends Model
     {
         return $this->belongsTo(Player::class);
     }
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(PlayerPosition::class);
+    }
 }

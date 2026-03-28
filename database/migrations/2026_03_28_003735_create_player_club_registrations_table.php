@@ -18,7 +18,9 @@ return new class extends Migration
 
             $table->date('registration_date')->nullable();
 
-            //$table->boolean('is_current')->default(false);
+            $table->enum('level', ['professional', 'no-professional'])->nullable();
+
+            $table->boolean('is_current')->default(false);
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

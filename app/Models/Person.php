@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,5 +35,10 @@ class Person extends Model
     public function player(): HasOne
     {
         return $this->hasOne(Player::class);
+    }
+
+    public function nationality(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'nationality_id');
     }
 }

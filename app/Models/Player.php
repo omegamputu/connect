@@ -36,4 +36,9 @@ class Player extends Model
     {
         return $this->hasMany(PlayerClubRegistration::class);
     }
+
+    public function currentClubRegistration(): HasOne
+    {
+        return $this->hasOne(PlayerClubRegistration::class)->where('is_current', true);
+    }
 }
