@@ -41,4 +41,9 @@ class Player extends Model
     {
         return $this->hasOne(PlayerClubRegistration::class)->where('is_current', true);
     }
+
+    public function callups(): HasMany
+    {
+        return $this->hasMany(PlayerMatchCallup::class);
+    }
 }

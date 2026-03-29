@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FootballMatch extends Model
@@ -77,5 +78,10 @@ class FootballMatch extends Model
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function callups(): HasMany
+    {
+        return $this->hasMany(PlayerMatchCallup::class, 'match_id');
     }
 }
