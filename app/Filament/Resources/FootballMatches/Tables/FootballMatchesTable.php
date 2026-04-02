@@ -16,33 +16,35 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class FootballMatchesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->with([
+                'homeTeam',
+                'awayTeam',
+                'competition',
+                'category',
+            ]))
             ->columns([
-                TextColumn::make('match_date')
-                    ->label('Date')
-                    ->date('d/m/Y')
-                    ->sortable(),
-                TextColumn::make('homeTeam.name')
-                    ->label('Home Team')
-                    ->searchable(),
-                TextColumn::make('awayTeam.name')
-                    ->label('Away Team')
-                    ->searchable(),
                 TextColumn::make('competition.name')
                     ->label('Competition')
                     ->badge()
                     ->searchable(),
+                TextColumn::make('Teams')
+                    ->label('Teams')
+                    ->getStateUsing(fn ($record) => "{$record->homeTeam->name} vs {$record->awayTeam->name}")
+                    ->searchable(fn (Builder $query, string $search) => $query->whereHas('homeTeam', fn (Builder $q) => $q->where('name', 'like', "%{$search}%"))
+                        ->orWhereHas('awayTeam', fn (Builder $q) => $q->where('name', 'like', "%{$search}%"))),
+                TextColumn::make('match_date')
+                    ->label('Date')
+                    ->date('d/m/Y')
+                    ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Category')
-                    ->badge()
-                    ->searchable(),
-                TextColumn::make('season.name')
-                    ->label('Season')
                     ->badge()
                     ->searchable(),
                 TextColumn::make('status')

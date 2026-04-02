@@ -2,11 +2,15 @@
 
 namespace App\Filament\Resources\PlayerMatchCallups\Schemas;
 
+use App\Models\FootballMatch;
 use App\Models\Player;
+use App\Models\Team;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class PlayerMatchCallupForm
@@ -26,7 +30,11 @@ class PlayerMatchCallupForm
                                 ($record->awayTeam?->name ?? '-'))
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(function (Set $set) {
+                                $set('team_id', null);
+                            }),
                         Select::make('player_id')
                             ->label('Player')
                             ->options(function () {
@@ -42,10 +50,31 @@ class PlayerMatchCallupForm
                             ->helperText('Select an existing player. Use the Players section to create a new player.'),
                         Select::make('team_id')
                             ->label('Team')
-                            ->relationship('team', 'name')
+                            ->options(function (Get $get) {
+                                $matchId = $get('match_id');
+
+                                if (!$matchId) {
+                                    return [];
+                                }
+
+                                $match = FootballMatch::query()->find($matchId);
+
+                                if (!$match) {
+                                    return [];
+                                }
+
+                                return Team::query()
+                                    ->whereIn('id', [$match->home_team_id, $match->away_team_id])
+                                    ->orderBy('name')
+                                    ->pluck('name', 'id')
+                                    ->toArray();
+                            })
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->required()
+                            ->live()
+                            ->disabled(fn (Get $get): bool => blank($get('match_id')))
+                            ->placeholder(fn (Get $get) => blank($get('match_id')) ? 'Select a match first' : 'Select a team'),
                         Select::make('position_id')
                             ->label('Position')
                             ->relationship('position', 'name')

@@ -22,7 +22,7 @@ class PlayerMatchCallupResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static ?string $navigationLabel = 'Player Callups';
+    protected static ?string $navigationLabel = 'Callups';
 
     protected static ?string $modelLabel = 'Player Callup';
 
